@@ -1,0 +1,15 @@
+Rows: 5000
+Columns: 41
+Disease distribution:
+Disease_Label
+Heart Disease    1273
+Bronchitis       1253
+Breast Cancer    1250
+Diabetes         1224
+
+Next disease distribution:
+Next_Possible_Disease
+Diabetes         1250
+Heart Disease    1250
+Bronchitis       1250
+Breast Cancer    1250

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+HealthRisk AI | Error
+{% endblock %}
+
+{% block content %}
+
+<div class="error-page">
+
+    <div class="error-card">
+
+        <div class="error-icon">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+        </div>
+
+
+        <h1>
+            Analysis Error
+        </h1>
+
+
+        <p>
+            {{ message }}
+        </p>
+
+
+        <a href="{{ url_for('prediction') }}">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            &nbsp; Back to Prediction
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

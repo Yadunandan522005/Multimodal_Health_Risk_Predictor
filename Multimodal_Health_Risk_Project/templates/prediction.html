@@ -1,0 +1,735 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="prediction-page">
+
+    <!-- PAGE HEADER -->
+    <div class="prediction-header">
+
+        <div class="prediction-header-icon">
+            <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+
+        <div>
+            <h1>Patient Health Prediction</h1>
+
+            <p>
+                Enter the patient's health information from multiple
+                data modalities for disease-specific risk analysis.
+            </p>
+        </div>
+
+    </div>
+
+
+    <form method="POST" action="/predict">
+
+        <!-- ================================================= -->
+        <!-- ROW 1 -->
+        <!-- LABORATORY REPORTS + MEDICAL HISTORY -->
+        <!-- ================================================= -->
+
+        <div class="prediction-row">
+
+
+            <!-- LABORATORY REPORTS -->
+
+            <section class="prediction-card">
+
+                <div class="prediction-card-header laboratory-header">
+
+                    <div class="prediction-factor-icon">
+                        <i class="fa-solid fa-flask-vial"></i>
+                    </div>
+
+                    <div>
+                        <h2>Laboratory Reports</h2>
+
+                        <p>
+                            Blood and laboratory measurements
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-form-grid">
+
+                    <div class="prediction-form-group">
+                        <label>Glucose(70-100 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Glucose"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>HbA1c(4-6%)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="HbA1c"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>Cholesterol(100-200 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Cholesterol"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>HDL(40-60 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="HDL"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>LDL(100-160 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="LDL"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>Triglycerides(50-150 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Triglycerides"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>Hemoglobin(12-18 g/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Hemoglobin"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>Creatinine(0.6-1.2 mg/dL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Creatinine"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>WBC(4,000-11,000/μL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="WBC"
+                        >
+                    </div>
+
+                    <div class="prediction-form-group">
+                        <label>Platelets(150,000-450,000/μL)</label>
+                        <input
+                            type="number"
+                            step="any"
+                            name="Platelets"
+                        >
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- MEDICAL HISTORY -->
+
+            <section class="prediction-card">
+
+                <div class="prediction-card-header history-header">
+
+                    <div class="prediction-factor-icon">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </div>
+
+                    <div>
+                        <h2>Medical History</h2>
+
+                        <p>
+                            Patient history and background
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-form-grid">
+
+                    <div class="prediction-form-group">
+
+                        <label>Age</label>
+
+                        <input
+                            type="number"
+                            name="Age"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Gender</label>
+
+                        <select name="Gender">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Family History</label>
+
+                        <select name="Family_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Previous Diseases</label>
+
+                        <select name="Previous_Diseases">
+
+                            <option value="None">
+                                None
+                            </option>
+
+                            <option value="Asthma">
+                                Asthma
+                            </option>
+
+                            <option value="Diabetes">
+                                Diabetes
+                            </option>
+
+                            <option value="Hypertension">
+                                Hypertension
+                            </option>
+
+                            <option value="Breast Cancer">
+                                Breast Cancer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Smoking History</label>
+
+                        <select name="Smoking_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Alcohol History</label>
+
+                        <select name="Alcohol_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Diabetes History</label>
+
+                        <select name="Diabetes_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Heart Disease History</label>
+
+                        <select name="Heart_Disease_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Bronchitis History</label>
+
+                        <select name="Bronchitis_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Breast Cancer History</label>
+
+                        <select name="Breast_Cancer_History">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                            <option value="No">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- ROW 2 -->
+        <!-- VITAL SIGNS + MEDICAL IMAGING -->
+        <!-- ================================================= -->
+
+        <div class="prediction-row">
+
+
+            <!-- VITAL SIGNS -->
+
+            <section class="prediction-card">
+
+                <div class="prediction-card-header vital-header">
+
+                    <div class="prediction-factor-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <div>
+                        <h2>Vital Signs</h2>
+
+                        <p>
+                            Physical health measurements
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-form-grid">
+
+                    <div class="prediction-form-group">
+
+                        <label>Systolic BP(120-140 mmHg)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Systolic_BP"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Diastolic BP(80-90 mmHg)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Diastolic_BP"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Heart Rate(60-100 bpm)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Heart_Rate"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Respiratory Rate(12-20 breaths/min)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Respiratory_Rate"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>SpO₂(95-100%)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="SpO2"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Temperature(36.1-37.8 °C)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Temperature"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>BMI(18.5-24.9)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="BMI"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Height (cm)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Height_cm"
+                        >
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>Weight (kg)</label>
+
+                        <input
+                            type="number"
+                            step="any"
+                            name="Weight_kg"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- MEDICAL IMAGING -->
+
+            <section class="prediction-card">
+
+                <div class="prediction-card-header imaging-header">
+
+                    <div class="prediction-factor-icon">
+                        <i class="fa-solid fa-x-ray"></i>
+                    </div>
+
+                    <div>
+                        <h2>Medical Imaging</h2>
+
+                        <p>
+                            Imaging findings and reports
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="prediction-form-grid">
+
+
+                    <div class="prediction-form-group">
+
+                        <label>
+                            Chest X-ray Finding
+                        </label>
+
+                        <select name="Chest_Xray_Finding">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Mild Infiltrate">
+                                Mild Infiltrate
+                            </option>
+
+                            <option value="Hyperinflation">
+                                Hyperinflation
+                            </option>
+
+                            <option value="Cardiomegaly">
+                                Cardiomegaly
+                            </option>
+
+                            <option value="Normal">
+                                Normal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>
+                            Mammogram Finding
+                        </label>
+
+                        <select name="Mammogram_Finding">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Suspicious">
+                                Suspicious
+                            </option>
+
+                            <option value="Benign">
+                                Benign
+                            </option>
+
+                            <option value="Dense Tissue">
+                                Dense Tissue
+                            </option>
+
+                            <option value="Normal">
+                                Normal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>
+                            Imaging Report
+                        </label>
+
+                        <select name="Imaging_Report">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="Normal">
+                                Normal
+                            </option>
+
+                            <option value="Abnormal">
+                                Abnormal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="prediction-form-group">
+
+                        <label>
+                            Image Category
+                        </label>
+
+                        <select name="Image_Category">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="X-ray">
+                                X-ray
+                            </option>
+
+                            <option value="Mammogram">
+                                Mammogram
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- ANALYZE BUTTON -->
+        <!-- ================================================= -->
+
+        <div class="analyze-section">
+
+            <button
+                type="submit"
+                class="analyze-btn"
+            >
+
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+                Analyze Health Risk
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

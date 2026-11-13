@@ -1,0 +1,2684 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="result-page">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <section class="result-header shadow-card">
+
+        <div class="result-header-icon">
+             <i class="bi bi-heart-pulse-fill"></i>
+        </div>
+
+        <div>
+
+            <div class="section-label">
+                HEALTH RISK ANALYSIS
+            </div>
+
+            <h1>
+                Prediction Results
+            </h1>
+
+            <p>
+                Analysis generated from the health information
+                provided for this assessment.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HEALTH FACTORS USED
+    ====================================================== -->
+
+    <section class="result-card shadow-card">
+
+        <div class="section-heading">
+
+            <div class="heading-icon blue">
+                <i class="bi bi-layers-fill"></i>
+            </div>
+
+            <div>
+
+                <div class="section-label">
+                    INPUT ANALYSIS
+                </div>
+
+                <h2>
+                    Health Factors Used
+                </h2>
+
+                <p>
+                    Information considered during the prediction.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="factor-grid">
+
+
+            <!-- LABORATORY -->
+
+            <div class="factor-item {% if 'Laboratory Reports' in result.used_modalities|default([]) %}factor-used{% endif %}">
+
+                <div class="factor-icon blue">
+                    <i class="bi bi-eyedropper"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Laboratory Reports
+                    </h4>
+
+                    <span>
+                        Laboratory measurements
+                    </span>
+                    {% if 'Laboratory Reports' in result.used_modalities|default([]) %}
+                    <span class="factor-status">DATA PROVIDED</span>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- MEDICAL HISTORY -->
+
+            <div class="factor-item {% if 'Medical History' in result.used_modalities|default([]) %}factor-used{% endif %}">
+
+                <div class="factor-icon purple">
+                    <i class="bi bi-file-medical-fill"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Medical History
+                    </h4>
+
+                    <span>
+                        Patient history information
+                    </span>
+                    {% if 'Medical History' in result.used_modalities|default([]) %}
+                    <span class="factor-status">DATA PROVIDED</span>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- VITAL SIGNS -->
+
+            <div class="factor-item {% if 'Vital Signs' in result.used_modalities|default([]) %}factor-used{% endif %}">
+
+                <div class="factor-icon pink">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Vital Signs
+                    </h4>
+
+                    <span>
+                        Physical health measurements
+                    </span>
+                    {% if 'Vital Signs' in result.used_modalities|default([]) %}
+                    <span class="factor-status">DATA PROVIDED</span>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- MEDICAL IMAGING -->
+
+            <div class="factor-item {% if 'Medical Imaging' in result.used_modalities|default([]) %}factor-used{% endif %}">
+
+                <div class="factor-icon green">
+                    <i class="bi bi-file-earmark-medical-fill"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Medical Imaging
+                    </h4>
+
+                    <span>
+                        Imaging-related findings
+                    </span>
+                    {% if 'Medical Imaging' in result.used_modalities|default([]) %}
+                    <span class="factor-status">DATA PROVIDED</span>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUMMARY CARDS
+    ====================================================== -->
+
+    <section class="prediction-summary">
+
+
+        <!-- PREDICTED DISEASE -->
+
+        <div class="summary-card shadow-card">
+
+            <div class="summary-icon disease-icon">
+                <i class="bi bi-virus2"></i>
+            </div>
+
+            <div class="section-label">
+                PREDICTED DISEASE
+            </div>
+
+            <h2>
+                {{ result.disease }}
+            </h2>
+
+            <p>
+                Disease category identified by the trained
+                prediction model.
+            </p>
+
+        </div>
+
+
+        <!-- RISK LEVEL -->
+
+        <div class="summary-card shadow-card">
+
+            <div class="summary-icon risk-icon">
+                <i class="bi bi-shield-fill"></i>
+            </div>
+
+            <div class="section-label">
+                RISK LEVEL
+            </div>
+
+            <div
+                class="risk-badge
+                {% if result.risk|lower == 'high' %}
+                    risk-high
+                {% elif result.risk|lower == 'medium' %}
+                    risk-medium
+                {% else %}
+                    risk-low
+                {% endif %}"
+            >
+                {{ result.risk }}
+            </div>
+
+            <p>
+                Risk classification generated by the trained model.
+            </p>
+
+        </div>
+
+
+        <!-- MODEL CONFIDENCE -->
+
+        <div class="summary-card shadow-card">
+
+            <div class="summary-icon confidence-icon">
+                <i class="bi bi-bar-chart-fill"></i>
+            </div>
+
+            <div class="section-label">
+                MODEL CONFIDENCE
+            </div>
+
+            <h2>
+                {{ result.confidence }}%
+            </h2>
+
+            <div class="confidence-bar">
+
+                <div
+                    class="confidence-progress"
+                    style="width: {{ result.confidence }}%;"
+                >
+                </div>
+
+            </div>
+
+            <p>
+                Estimated confidence associated with this prediction.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CURRENT RISK ASSESSMENT
+    ====================================================== -->
+
+    <section class="assessment-card shadow-card">
+
+        <div class="assessment-header">
+
+            <div class="summary-icon assessment-icon">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </div>
+
+            <div>
+
+                <div class="section-label">
+                    CURRENT RISK ASSESSMENT
+                </div>
+
+                <h2>
+                    {{ result.disease }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="assessment-grid">
+
+
+            <!-- RISK INTERPRETATION -->
+
+            <div class="assessment-box">
+
+                <div class="assessment-box-title">
+
+                    <i class="bi bi-graph-up"></i>
+
+                    <span>
+                        Risk Interpretation
+                    </span>
+
+                </div>
+
+                <p>
+
+                    The system has classified the current disease
+                    risk as
+
+                    <strong>
+                        {{ result.risk }}
+                    </strong>.
+
+                    This classification is based on the information
+                    supplied for the prediction.
+
+                </p>
+
+            </div>
+
+
+            <!-- PREVENTION -->
+
+            <div class="assessment-box">
+
+                <div class="assessment-box-title">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <span>
+                        Prevention & Guidance
+                    </span>
+
+                </div>
+
+                <p>
+                    {{ result.current_prevention }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+     FACTOR-WISE CONTRIBUTION ANALYSIS
+    ====================================================== -->
+
+    <section class="result-card shadow-card">
+
+        <div class="section-heading">
+
+            <div class="heading-icon blue">
+                <i class="bi bi-bar-chart-fill"></i>
+            </div>
+
+            <div>
+
+                <div class="section-label">
+                    FACTOR-LEVEL EXPLANATION
+                
+                </div>
+
+                <h2>
+                    Factor-wise Contribution
+                </h2>
+
+                <p>
+                    Relative contribution of each healthcare
+                    category to the predicted disease.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% if result.factor_contributions %}
+
+        <div class="factor-contribution-list">
+
+            {% for factor in result.factor_contributions %}
+
+            <div class="contribution-item">
+
+                <div class="contribution-heading">
+
+                    <span>
+                        {{ factor.name }}
+                    </span>
+
+                    <strong>
+                        {{ "%.2f"|format(factor.percentage) }}%
+                    </strong>
+
+                </div>
+
+                    <div class="contribution-track">
+
+                    <div
+                        class="contribution-fill"
+                        style="width: {{ factor.percentage }}%;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <p class="contribution-note">
+
+            Percentages indicate the relative magnitude of
+            grouped SHAP contributions. They do not represent
+            disease probability or medical causation.
+
+        </p>
+
+        {% else %}
+
+        <p>
+            Factor-wise contribution information is unavailable.
+        </p>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =====================================================
+         SHAP EXPLANATION
+    ====================================================== -->
+
+    <section class="shap-card shadow-card">
+
+
+        <div class="shap-header">
+
+            <div class="shap-icon">
+                <i class="bi bi-bar-chart-steps"></i>
+            </div>
+
+            <div>
+
+                <div class="section-label">
+                    EXPLAINABLE AI
+                </div>
+
+                <h2>
+                    Major Contributing Factors — SHAP
+                </h2>
+
+                <p>
+                    The factors below show which input features
+                    contributed to the model's prediction.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if result.shap %}
+
+
+        <div class="shap-table-wrapper">
+
+            <table class="shap-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Feature
+                        </th>
+
+                        <th>
+                            Impact
+                        </th>
+
+                        <th>
+                            Direction
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for x in result.shap %}
+
+                    <tr>
+
+
+                        <!-- FEATURE -->
+
+                        <td>
+
+                            <div class="shap-feature">
+
+                                <div
+                                    class="feature-dot
+                                    {% if x.direction|lower == 'increases' %}
+                                        positive-dot
+                                    {% else %}
+                                        negative-dot
+                                    {% endif %}"
+                                >
+                                </div>
+
+                                <strong>
+                                    {{ x.feature }}
+                                </strong>
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- IMPACT -->
+
+                        <td>
+
+                            <span class="impact-value">
+
+                                {{ "%.4f"|format(x.impact|float) }}
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- DIRECTION -->
+
+                        <td>
+
+                            {% if x.direction|lower == 'increases' %}
+
+                            <span class="direction-badge direction-increase">
+
+                                <i class="bi bi-arrow-up"></i>
+
+                                Increases risk
+
+                            </span>
+
+
+                            {% elif x.direction|lower == 'decreases' %}
+
+                            <span class="direction-badge direction-decrease">
+
+                                <i class="bi bi-arrow-down"></i>
+
+                                Decreases risk
+
+                            </span>
+
+
+                            {% else %}
+
+                            <span class="direction-badge direction-neutral">
+
+                                <i class="bi bi-dash"></i>
+
+                                {{ x.direction }}
+
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- SHAP EXPLANATION -->
+
+        <div class="shap-explanation">
+
+            <div class="shap-explanation-icon">
+
+                <i class="bi bi-lightbulb-fill"></i>
+
+            </div>
+
+            <div>
+
+                <h4>
+                    How to interpret these factors
+                </h4>
+
+                <p>
+
+                    SHAP (SHapley Additive exPlanations) helps
+                    explain the contribution of individual input
+                    features to the model's prediction.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="no-shap-data">
+
+            <i class="bi bi-info-circle"></i>
+
+            <p>
+                SHAP explanation is not available.
+            </p>
+
+        </div>
+
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =====================================================
+         NEXT POSSIBLE DISEASE
+    ====================================================== -->
+
+    <section class="future-risk-card shadow-card">
+
+
+        <div class="future-header">
+
+            <div class="summary-icon future-icon">
+
+                <i class="bi bi-graph-up-arrow"></i>
+
+            </div>
+
+            <div>
+
+                <div class="section-label">
+                    FUTURE RISK ANALYSIS
+                </div>
+
+                <h2>
+                    Next Possible Disease
+                </h2>
+
+                <p>
+                    A potential future disease category
+                    identified by the trained model.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="future-content">
+
+
+            <!-- NEXT DISEASE -->
+
+            <div class="future-condition">
+
+                <div class="section-label">
+                    POSSIBLE NEXT CONDITION
+                </div>
+
+                <h3>
+                    {{ result.next_disease }}
+                </h3>
+
+            </div>
+
+
+            <!-- GUIDANCE -->
+
+            <div class="future-prevention">
+
+                <div class="assessment-box-title">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <span>
+                        Prevention & Guidance
+                    </span>
+
+                </div>
+
+                <p>
+                    {{ result.next_prevention }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PREVENTION CARDS
+    ====================================================== -->
+
+    <section class="prevention-grid">
+
+
+        <!-- CURRENT DISEASE -->
+
+        <div class="prevention-card shadow-card">
+
+            <div class="prevention-icon current-prevention">
+
+                <i class="bi bi-shield-fill"></i>
+
+            </div>
+
+            <div class="section-label">
+                CURRENT DISEASE PREVENTION
+            </div>
+
+            <h3>
+                {{ result.disease }}
+            </h3>
+
+            <p>
+                {{ result.current_prevention }}
+            </p>
+
+        </div>
+
+
+        <!-- NEXT DISEASE -->
+
+        <div class="prevention-card shadow-card">
+
+            <div class="prevention-icon next-prevention">
+
+                <i class="bi bi-shield-check"></i>
+
+            </div>
+
+            <div class="section-label">
+                NEXT DISEASE PREVENTION
+            </div>
+
+            <h3>
+                {{ result.next_disease }}
+            </h3>
+
+            <p>
+                {{ result.next_prevention }}
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BUTTONS
+    ====================================================== -->
+
+    <section class="result-actions">
+
+
+        <!-- NEW ANALYSIS -->
+
+        <a
+            href="{{ url_for('prediction') }}"
+            class="result-button primary-button"
+        >
+
+            <i class="bi bi-arrow-repeat"></i>
+
+            New Analysis
+
+        </a>
+
+
+        <!-- DASHBOARD -->
+
+        <a
+            href="{{ url_for('result_dashboard') }}"
+            class="result-button secondary-button"
+        >
+
+            <i class="bi bi-bar-chart-fill"></i>
+
+            View Dashboard
+
+        </a>
+
+
+        <!-- DOWNLOAD PDF -->
+
+        <a
+            href="{{ url_for('download_result') }}"
+            class="result-button download-button"
+        >
+
+            <i class="bi bi-file-earmark-pdf-fill"></i>
+
+            Download Results
+
+        </a>
+
+    </section>
+
+</div>
+
+
+
+<!-- ==========================================================
+     RESULT PAGE CSS
+=========================================================== -->
+
+<style>
+
+
+/* ==========================================================
+   MAIN PAGE
+=========================================================== */
+
+.result-page {
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 35px 20px 60px;
+
+    position: relative;
+
+}
+
+
+/* ==========================================================
+   MEDICAL BACKGROUND
+=========================================================== */
+
+.result-page::before,
+.result-page::after {
+
+    content: "";
+
+    position: fixed;
+
+    width: 240px;
+
+    height: 420px;
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: 0.055;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+.result-page::before {
+
+    left: 0;
+
+    top: 180px;
+
+    background-image:
+        url("/static/images/medical-left.png");
+
+}
+
+
+.result-page::after {
+
+    right: 0;
+
+    top: 180px;
+
+    background-image:
+        url("/static/images/medical-right.png");
+
+}
+
+
+
+/* ==========================================================
+   COMMON CARD
+=========================================================== */
+
+.shadow-card {
+
+    background:
+        rgba(255,255,255,0.98);
+
+    border:
+        1px solid #dce5f0;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 7px 20px rgba(31,61,94,0.06),
+        0 2px 5px rgba(31,61,94,0.03);
+
+}
+
+
+
+/* ==========================================================
+   HEADER
+=========================================================== */
+
+.result-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px 20px;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.result-header > div:last-child {
+    text-align: center;
+}
+
+.result-header h1 {
+    margin: 4px 0 8px;
+    color: #173451;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.result-header p {
+    margin: 0;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================================
+   HEALTH FACTORS
+=========================================================== */
+
+.result-card {
+
+    padding:
+        16px 18px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.section-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section-heading > div:last-child {
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin: 4px 0 8px;
+    font-size: 22px;
+    line-height: 1.35;
+    color: #193451;
+}
+
+.section-heading p {
+    margin: 0;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.heading-icon.blue {
+
+    background:
+        #edf5ff;
+
+    color:
+        #2879df;
+
+}
+
+
+.section-heading h2 {
+
+    margin:
+        2px 0;
+
+    font-size:
+        14px;
+
+    color:
+        #193451;
+
+}
+
+
+.section-heading p {
+
+    margin:
+        0;
+
+    color:
+        #7b8798;
+
+    font-size:
+        8px;
+
+}
+
+
+.factor-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        8px;
+
+}
+
+
+.factor-item {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        9px;
+
+    border:
+        1px solid #e1e8f1;
+
+    border-radius:
+        8px;
+
+    background:
+        #fbfdff;
+
+}
+
+
+.factor-icon {
+
+    width:
+        29px;
+
+    height:
+        29px;
+
+    border-radius:
+        8px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-shrink:
+        0;
+
+    font-size:
+        12px;
+
+}
+
+
+.factor-icon.blue {
+
+    background:
+        #edf5ff;
+
+    color:
+        #2779e2;
+
+}
+
+
+.factor-icon.purple {
+
+    background:
+        #f4edff;
+
+    color:
+        #8761dc;
+
+}
+
+
+.factor-icon.pink {
+
+    background:
+        #fff0f4;
+
+    color:
+        #e46c89;
+
+}
+
+
+.factor-icon.green {
+
+    background:
+        #eaf9f4;
+
+    color:
+        #209879;
+
+}
+
+
+.factor-item h4 {
+
+    margin:
+        0 0 2px;
+
+    color:
+        #27405e;
+
+    font-size:
+        8px;
+
+}
+
+
+.factor-item span {
+
+    color:
+        #8995a6;
+
+    font-size:
+        6.5px;
+
+}
+
+
+
+/* ==========================================================
+   SUMMARY
+=========================================================== */
+
+.prediction-summary {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        10px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.summary-card {
+
+    padding:
+        14px;
+
+    min-height:
+        100px;
+
+    box-sizing:
+        border-box;
+
+}
+
+
+.summary-icon {
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    border-radius:
+        8px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        11px;
+
+}
+
+
+.disease-icon {
+
+    background:
+        #eef4ff;
+
+    color:
+        #2878df;
+
+}
+
+
+.risk-icon {
+
+    background:
+        #eefaf5;
+
+    color:
+        #2a9978;
+
+}
+
+
+.confidence-icon {
+
+    background:
+        #f1edff;
+
+    color:
+        #7958d3;
+
+}
+
+
+.summary-card h2 {
+
+    margin:
+        4px 0;
+
+    font-size:
+        15px;
+
+    color:
+        #193451;
+
+}
+
+
+.summary-card p {
+
+    margin:
+        4px 0 0;
+
+    color:
+        #7a899a;
+
+    font-size:
+        7px;
+
+    line-height:
+        1.45;
+
+}
+
+
+.risk-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        3px 9px;
+
+    border-radius:
+        10px;
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    margin-top:
+        2px;
+
+}
+
+
+.risk-low {
+
+    color:
+        #188b67;
+
+    background:
+        #e9f8f1;
+
+}
+
+
+.risk-medium {
+
+    color:
+        #bf7914;
+
+    background:
+        #fff4df;
+
+}
+
+
+.risk-high {
+
+    color:
+        #d34e61;
+
+    background:
+        #ffebef;
+
+}
+
+
+.confidence-bar {
+
+    height:
+        4px;
+
+    width:
+        100%;
+
+    background:
+        #e9eef5;
+
+    border-radius:
+        4px;
+
+    overflow:
+        hidden;
+
+    margin-top:
+        7px;
+
+}
+
+
+.confidence-progress {
+
+    height:
+        100%;
+
+    background:
+        #377ff0;
+
+    border-radius:
+        4px;
+
+}
+
+
+
+/* ==========================================================
+   CURRENT RISK
+=========================================================== */
+
+.assessment-card {
+
+    padding:
+        16px 18px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.assessment-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.assessment-header .summary-icon {
+
+    margin:
+        0;
+
+}
+
+
+.assessment-header h2 {
+
+    margin:
+        2px 0 0;
+
+    color:
+        #193451;
+
+    font-size:
+        14px;
+
+}
+
+
+.assessment-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        8px;
+
+}
+
+
+.assessment-box {
+
+    border:
+        1px solid #e1e8f1;
+
+    border-radius:
+        8px;
+
+    padding:
+        10px;
+
+    background:
+        #fbfdff;
+
+}
+
+
+.assessment-box-title {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    color:
+        #294766;
+
+    font-size:
+        8px;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        6px;
+
+}
+
+
+.assessment-box-title i {
+
+    color:
+        #3279d7;
+
+}
+
+
+.assessment-box p {
+
+    margin:
+        0;
+
+    color:
+        #718096;
+
+    font-size:
+        7.5px;
+
+    line-height:
+        1.6;
+
+}
+
+
+.assessment-box strong {
+
+    color:
+        #193451;
+
+}
+
+
+
+/* ==========================================================
+   SHAP
+=========================================================== */
+
+.shap-card {
+
+    padding:
+        16px 18px;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.shap-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    padding-bottom:
+        11px;
+
+    border-bottom:
+        1px solid #e7edf4;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.shap-icon {
+
+    width:
+        32px;
+
+    height:
+        32px;
+
+    border-radius:
+        9px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #f2edff;
+
+    color:
+        #7958d3;
+
+    font-size:
+        13px;
+
+}
+
+
+.shap-header h2 {
+
+    margin:
+        2px 0;
+
+    color:
+        #193451;
+
+    font-size:
+        14px;
+
+}
+
+
+.shap-header p {
+
+    margin:
+        0;
+
+    color:
+        #7b8798;
+
+    font-size:
+        8px;
+
+}
+
+
+.shap-table-wrapper {
+
+    width:
+        100%;
+
+    overflow-x:
+        auto;
+
+}
+
+
+.shap-table {
+
+    width:
+        100%;
+
+    border-collapse:
+        collapse;
+
+    font-size:
+        7.5px;
+
+}
+
+
+.shap-table th {
+
+    text-align:
+        left;
+
+    padding:
+        7px 8px;
+
+    color:
+        #52657b;
+
+    background:
+        #f5f8fb;
+
+    border-bottom:
+        1px solid #dce5ee;
+
+    font-weight:
+        700;
+
+}
+
+
+.shap-table td {
+
+    padding:
+        6px 8px;
+
+    border-bottom:
+        1px solid #e7edf3;
+
+    color:
+        #63778d;
+
+    vertical-align:
+        middle;
+
+}
+
+
+.shap-feature {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+}
+
+
+.shap-feature strong {
+
+    color:
+        #34536f;
+
+    font-weight:
+        600;
+
+}
+
+
+.feature-dot {
+
+    width:
+        6px;
+
+    height:
+        6px;
+
+    border-radius:
+        50%;
+
+    flex-shrink:
+        0;
+
+}
+
+
+.positive-dot {
+
+    background:
+        #d96170;
+
+}
+
+
+.negative-dot {
+
+    background:
+        #3c88bd;
+
+}
+
+
+.impact-value {
+
+    color:
+        #536b83;
+
+    font-weight:
+        500;
+
+}
+
+
+.direction-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        4px;
+
+    padding:
+        3px 6px;
+
+    border-radius:
+        6px;
+
+    font-size:
+        6.5px;
+
+    font-weight:
+        600;
+
+}
+
+
+.direction-increase {
+
+    color:
+        #c95463;
+
+    background:
+        #fff0f2;
+
+}
+
+
+.direction-decrease {
+
+    color:
+        #377eaf;
+
+    background:
+        #edf6fc;
+
+}
+
+
+.direction-neutral {
+
+    color:
+        #777;
+
+    background:
+        #f2f3f4;
+
+}
+
+
+.shap-explanation {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-top:
+        10px;
+
+    padding:
+        8px 10px;
+
+    background:
+        #f7f4ff;
+
+    border:
+        1px solid #e7ddfb;
+
+    border-radius:
+        7px;
+
+}
+
+
+.shap-explanation-icon {
+
+    width:
+        23px;
+
+    height:
+        23px;
+
+    border-radius:
+        6px;
+
+    background:
+        #ebe3ff;
+
+    color:
+        #7958d3;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    flex-shrink:
+        0;
+
+    font-size:
+        10px;
+
+}
+
+
+.shap-explanation h4 {
+
+    margin:
+        0 0 2px;
+
+    color:
+        #4f3d82;
+
+    font-size:
+        7.5px;
+
+}
+
+
+.shap-explanation p {
+
+    margin:
+        0;
+
+    color:
+        #7b7191;
+
+    font-size:
+        6.8px;
+
+    line-height:
+        1.5;
+
+}
+
+
+.no-shap-data {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    color:
+        #7c8b9b;
+
+    font-size:
+        8px;
+
+}
+
+
+
+/* ==========================================================
+   FUTURE RISK
+=========================================================== */
+
+.future-risk-card {
+
+    padding:
+        16px 18px;
+
+    margin-bottom:
+        12px;
+
+    border-color:
+        #cfe9de;
+
+}
+
+
+.future-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.future-icon {
+
+    background:
+        #eaf9f3;
+
+    color:
+        #209879;
+
+}
+
+
+.future-header h2 {
+
+    margin:
+        2px 0;
+
+    color:
+        #193451;
+
+    font-size:
+        14px;
+
+}
+
+
+.future-header p {
+
+    margin:
+        0;
+
+    color:
+        #7b8798;
+
+    font-size:
+        8px;
+
+}
+
+
+.future-content {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        0.8fr 1.2fr;
+
+    gap:
+        8px;
+
+}
+
+
+.future-condition {
+
+    border:
+        1px solid #cfe9de;
+
+    background:
+        #f3fbf7;
+
+    border-radius:
+        8px;
+
+    padding:
+        11px;
+
+}
+
+
+.future-condition h3 {
+
+    margin:
+        4px 0 0;
+
+    color:
+        #178365;
+
+    font-size:
+        12px;
+
+}
+
+
+.future-prevention {
+
+    border:
+        1px solid #dce9e4;
+
+    background:
+        #fbfefd;
+
+    border-radius:
+        8px;
+
+    padding:
+        11px;
+
+}
+
+
+.future-prevention p {
+
+    margin:
+        5px 0 0;
+
+    color:
+        #718096;
+
+    font-size:
+        7.5px;
+
+    line-height:
+        1.6;
+
+}
+
+
+
+/* ==========================================================
+   PREVENTION CARDS
+=========================================================== */
+
+.prevention-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        10px;
+
+    margin-bottom:
+        13px;
+
+}
+
+
+.prevention-card {
+
+    padding:
+        14px;
+
+}
+
+
+.prevention-icon {
+
+    width:
+        29px;
+
+    height:
+        29px;
+
+    border-radius:
+        8px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        11px;
+
+}
+
+
+.current-prevention {
+
+    background:
+        #edf5ff;
+
+    color:
+        #2879df;
+
+}
+
+
+.next-prevention {
+
+    background:
+        #eaf9f3;
+
+    color:
+        #209879;
+
+}
+
+
+.prevention-card h3 {
+
+    margin:
+        3px 0 5px;
+
+    color:
+        #193451;
+
+    font-size:
+        11px;
+
+}
+
+
+.prevention-card p {
+
+    margin:
+        0;
+
+    color:
+        #718096;
+
+    font-size:
+        7.5px;
+
+    line-height:
+        1.65;
+
+}
+
+
+
+/* ==========================================================
+   BUTTONS
+=========================================================== */
+
+.result-actions {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    margin-top:
+        4px;
+
+}
+
+
+.result-button {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        8px 12px;
+
+    border-radius:
+        7px;
+
+    text-decoration:
+        none;
+
+    font-size:
+        7.5px;
+
+    font-weight:
+        600;
+
+}
+
+
+.primary-button {
+
+    background:
+        #2779e5;
+
+    color:
+        white;
+
+    border:
+        1px solid #2779e5;
+
+}
+
+
+.secondary-button {
+
+    background:
+        white;
+
+    color:
+        #315d83;
+
+    border:
+        1px solid #d4e0ec;
+
+}
+
+
+.download-button {
+
+    background:
+        #eaf9f3;
+
+    color:
+        #218b71;
+
+    border:
+        1px solid #c9e5dc;
+
+}
+
+
+.result-button:hover {
+
+    text-decoration:
+        none;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+
+/* ==========================================================
+   DISCLAIMER
+=========================================================== */
+
+.result-disclaimer {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        7px;
+
+    margin-top:
+        12px;
+
+    padding:
+        9px 11px;
+
+    border:
+        1px solid #e1e8f0;
+
+    border-radius:
+        7px;
+
+    background:
+        #fafcff;
+
+}
+
+
+.result-disclaimer i {
+
+    color:
+        #6d8eae;
+
+    font-size:
+        9px;
+
+    margin-top:
+        1px;
+
+}
+
+
+.result-disclaimer p {
+
+    margin:
+        0;
+
+    color:
+        #8492a2;
+
+    font-size:
+        6.5px;
+
+    line-height:
+        1.55;
+
+}
+
+
+
+/* ==========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media (max-width: 850px) {
+
+    .prediction-summary {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .result-page {
+
+        padding:
+            25px 12px 40px;
+
+    }
+
+
+    .factor-grid,
+    .assessment-grid,
+    .prevention-grid,
+    .future-content {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .prediction-summary {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .result-actions {
+
+        flex-wrap:
+            wrap;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .result-header {
+
+        padding:
+            13px;
+
+    }
+
+
+    .result-header h1 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .shap-table {
+
+        min-width:
+            500px;
+
+    }
+
+}
+
+/* ==========================================
+   RESULTS PAGE - STANDARDIZED FONT SIZES
+   ========================================== */
+
+.result-page {
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #193451;
+}
+
+/* Main heading */
+.result-page .result-header h1 {
+    font-size: 26px;
+    line-height: 1.3;
+}
+
+/* Section headings */
+.result-page h2 {
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+.result-page h3 {
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.result-page h4 {
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+/* Standard paragraph text */
+.result-page p,
+.result-page li {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Small section labels */
+.result-page .section-label {
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+
+/* Health factor cards */
+.result-page .factor-item h4 {
+    font-size: 14px;
+}
+
+.result-page .factor-item span {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Prediction summary cards */
+.result-page .summary-card h2 {
+    font-size: 21px;
+}
+
+.result-page .summary-card p {
+    font-size: 13px;
+}
+
+/* Risk badge and confidence */
+.result-page .risk-badge {
+    font-size: 13px;
+}
+
+.result-page .confidence-bar {
+    height: 6px;
+}
+
+/* Risk interpretation and prevention */
+.result-page .assessment-box-title {
+    font-size: 14px;
+}
+
+.result-page .assessment-box p,
+.result-page .future-prevention p,
+.result-page .prevention-card p {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* SHAP explanation table */
+.result-page .shap-table,
+.result-page .shap-table th,
+.result-page .shap-table td {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.result-page .direction-badge {
+    font-size: 12px;
+}
+
+/* Explanation panel */
+.result-page .shap-explanation h4 {
+    font-size: 14px;
+}
+
+.result-page .shap-explanation p {
+    font-size: 13px;
+}
+
+/* Action buttons */
+.result-page .result-button {
+    font-size: 14px;
+    padding: 10px 14px;
+}
+
+/* Mobile readability */
+@media (max-width: 600px) {
+    .result-page .result-header h1 {
+        font-size: 23px;
+    }
+
+    .result-page h2 {
+        font-size: 18px;
+    }
+
+    .result-page h3 {
+        font-size: 16px;
+    }
+
+    .result-page p,
+    .result-page li {
+        font-size: 13px;
+    }
+
+    .result-page .shap-table,
+    .result-page .shap-table th,
+    .result-page .shap-table td {
+        font-size: 12px;
+    }
+}
+
+
+/* Highlight only the health modalities that received user-provided data */
+.result-page .factor-item.factor-used {
+    border: 2px solid #2f9e79;
+    background: linear-gradient(135deg, #f0fbf6 0%, #ffffff 100%);
+    box-shadow: 0 0 0 3px rgba(47, 158, 121, 0.10);
+    position: relative;
+}
+
+.result-page .factor-item.factor-used h4 {
+    color: #176b52;
+}
+
+.result-page .factor-status {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #dff7eb;
+    color: #147653;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+}
+
+.result-page .factor-item:not(.factor-used) .factor-status {
+    display: none;
+}
+
+</style>
+
+{% endblock %}

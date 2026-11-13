@@ -1,0 +1,696 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="dashboard-page">
+
+    <!-- ================================================= -->
+    <!-- DASHBOARD HEADER -->
+    <!-- ================================================= -->
+
+    <section class="dashboard-header">
+
+        <div class="dashboard-title-area">
+
+            <div class="dashboard-main-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+            </div>
+
+            <div>
+
+                <span class="dashboard-label">
+                    HEALTH ANALYTICS
+                </span>
+
+                <h1>
+                    Dataset &amp; Model Dashboard
+                </h1>
+
+                <p>
+                    Overview of patient data, disease distribution,
+                    risk levels and model performance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- STATISTICS -->
+    <!-- ================================================= -->
+
+    <section class="dashboard-stat-grid">
+
+
+        <!-- PATIENTS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon patients-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <div>
+
+                <span class="dashboard-stat-label">
+                    Total Patients
+                </span>
+
+                <strong>
+                    {{ rows }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COLUMNS -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon columns-icon">
+
+                <i class="fa-solid fa-table-columns"></i>
+
+            </div>
+
+            <div>
+
+                <span class="dashboard-stat-label">
+                    Dataset Features
+                </span>
+
+                <strong>
+                    {{ columns }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DISEASES -->
+
+        <div class="dashboard-stat-card">
+
+            <div class="dashboard-stat-icon diseases-icon">
+
+                <i class="fa-solid fa-virus"></i>
+
+            </div>
+
+            <div>
+
+                <span class="dashboard-stat-label">
+                    Diseases
+                </span>
+
+                <strong>
+                    4
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- PIE CHARTS -->
+    <!-- ================================================= -->
+
+    <section class="charts-section">
+
+
+        <div class="section-heading-dashboard">
+
+            <span>
+                ANALYTICAL OVERVIEW
+            </span>
+
+            <h2>
+                Health Risk Distribution
+            </h2>
+
+            <p>
+                Visual representation of disease categories,
+                risk levels and possible next diseases.
+            </p>
+
+        </div>
+
+
+
+        <div class="chart-grid">
+
+
+            <!-- =========================================== -->
+            <!-- DISEASE DISTRIBUTION -->
+            <!-- =========================================== -->
+
+            <div class="chart-card">
+
+                <div class="chart-card-header">
+
+                    <div class="chart-title-icon disease-chart-icon">
+
+                        <i class="fa-solid fa-virus"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Disease Distribution
+                        </h3>
+
+                        <p>
+                            Distribution of predicted diseases
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="diseaseChart"></canvas>
+
+                </div>
+
+
+                <div class="chart-description">
+
+                    Shows the proportion of patients
+                    associated with each disease category.
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================== -->
+            <!-- RISK DISTRIBUTION -->
+            <!-- =========================================== -->
+
+            <div class="chart-card">
+
+                <div class="chart-card-header">
+
+                    <div class="chart-title-icon risk-chart-icon">
+
+                        <i class="fa-solid fa-shield-heart"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Risk Distribution
+                        </h3>
+
+                        <p>
+                            Overall patient risk levels
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="riskChart"></canvas>
+
+                </div>
+
+
+                <div class="chart-description">
+
+                    Shows the percentage of patients
+                    classified as Low, Medium or High risk.
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================== -->
+            <!-- NEXT DISEASE DISTRIBUTION -->
+            <!-- =========================================== -->
+
+            <div class="chart-card">
+
+                <div class="chart-card-header">
+
+                    <div class="chart-title-icon next-chart-icon">
+
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Next Disease Distribution
+                        </h3>
+
+                        <p>
+                            Possible future disease categories
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-container">
+
+                    <canvas id="nextChart"></canvas>
+
+                </div>
+
+
+                <div class="chart-description">
+
+                    Shows the distribution of possible
+                    next diseases predicted by the system.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- MODEL PERFORMANCE -->
+    <!-- ================================================= -->
+
+    {% if metrics %}
+
+    <section class="performance-card">
+
+
+        <div class="performance-header">
+
+            <div class="performance-icon">
+
+                <i class="fa-solid fa-brain"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    MACHINE LEARNING
+                </span>
+
+                <h2>
+                    Model Performance
+                </h2>
+
+                <p>
+                    Comparison of the trained disease prediction models.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="best-model-box">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>
+                Best disease model
+            </span>
+
+            <strong>
+                {{ metrics.disease_model.best_model }}
+            </strong>
+
+        </div>
+
+
+
+        <div class="table-wrapper">
+
+            <table class="performance-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Model
+                        </th>
+
+                        <th>
+                            Accuracy
+                        </th>
+
+                        <th>
+                            Precision
+                        </th>
+
+                        <th>
+                            Recall
+                        </th>
+
+                        <th>
+                            F1 Score
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for r in metrics.disease_model.results %}
+
+                    <tr>
+
+                        <td class="model-name">
+                            {{ r.model }}
+                        </td>
+
+                        <td>
+                            {{ "%.3f"|format(r.accuracy) }}
+                        </td>
+
+                        <td>
+                            {{ "%.3f"|format(r.precision_weighted) }}
+                        </td>
+
+                        <td>
+                            {{ "%.3f"|format(r.recall_weighted) }}
+                        </td>
+
+                        <td>
+                            {{ "%.3f"|format(r.f1_weighted) }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    {% else %}
+
+    <div class="dashboard-alert">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span>
+            Train the models to display performance metrics.
+        </span>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- CHART.JS -->
+<!-- ================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js">
+</script>
+
+
+<!-- ================================================= -->
+<!-- CHART.JS DATA LABELS -->
+<!-- ================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2">
+</script>
+
+
+
+<script>
+
+const disease = {{ disease_counts|tojson }};
+
+const risk = {{ risk_counts|tojson }};
+
+const next = {{ next_counts|tojson }};
+
+
+
+/* ================================================= */
+/* PIE CHART CREATOR */
+/* ================================================= */
+
+function createPieChart(id, dataObject) {
+
+    const canvas =
+        document.getElementById(id);
+
+    if (!canvas) {
+        return;
+    }
+
+
+    const labels =
+        Object.keys(dataObject);
+
+    const values =
+        Object.values(dataObject);
+
+
+    new Chart(canvas, {
+
+        type: 'pie',
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                data: values,
+
+                backgroundColor: [
+
+                    '#3b9ddd',
+                    '#ef5b7a',
+                    '#f59e42',
+                    '#f6c453',
+                    '#7c68d8',
+                    '#45b89c',
+                    '#8c9eff'
+
+                ],
+
+                borderColor:
+                    '#ffffff',
+
+                borderWidth:
+                    3,
+
+                hoverOffset:
+                    8
+
+            }]
+
+        },
+
+
+        plugins: [
+
+            ChartDataLabels
+
+        ],
+
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: true,
+
+            layout: {
+
+                padding: 8
+
+            },
+
+
+            plugins: {
+
+                legend: {
+
+                    position:
+                        'bottom',
+
+                    labels: {
+
+                        usePointStyle:
+                            true,
+
+                        pointStyle:
+                            'circle',
+
+                        padding:
+                            15,
+
+                        font: {
+
+                            size:
+                                11
+
+                        }
+
+                    }
+
+                },
+
+
+                tooltip: {
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            const total =
+                                context.dataset.data
+                                .reduce(
+                                    (a, b) => a + b,
+                                    0
+                                );
+
+                            const value =
+                                context.raw;
+
+                            const percentage =
+                                ((value / total) * 100)
+                                .toFixed(1);
+
+                            return (
+                                context.label +
+                                ': ' +
+                                value +
+                                ' (' +
+                                percentage +
+                                '%)'
+                            );
+
+                        }
+
+                    }
+
+                },
+
+
+                datalabels: {
+
+                    color:
+                        '#ffffff',
+
+                    font: {
+
+                        weight:
+                            'bold',
+
+                        size:
+                            13
+
+                    },
+
+
+                    formatter: function(value, context) {
+
+                        const data =
+                            context.chart.data.datasets[0].data;
+
+                        const total =
+                            data.reduce(
+                                (a, b) => a + b,
+                                0
+                            );
+
+                        const percentage =
+                            (value / total) * 100;
+
+
+                        if (percentage < 5) {
+
+                            return '';
+
+                        }
+
+
+                        return percentage.toFixed(1) + '%';
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
+
+/* ================================================= */
+/* CREATE ALL THREE CHARTS */
+/* ================================================= */
+
+createPieChart(
+    'diseaseChart',
+    disease
+);
+
+
+createPieChart(
+    'riskChart',
+    risk
+);
+
+
+createPieChart(
+    'nextChart',
+    next
+);
+
+</script>
+
+{% endblock %}

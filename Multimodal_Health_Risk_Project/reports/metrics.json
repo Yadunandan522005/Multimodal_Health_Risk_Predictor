@@ -1,0 +1,394 @@
+{
+  "dataset_rows": 5000,
+  "dataset_columns": 40,
+  "features_used": [
+    "Glucose",
+    "HbA1c",
+    "Cholesterol",
+    "HDL",
+    "LDL",
+    "Triglycerides",
+    "Hemoglobin",
+    "Creatinine",
+    "WBC",
+    "Platelets",
+    "Age",
+    "Gender",
+    "Family_History",
+    "Previous_Diseases",
+    "Smoking_History",
+    "Alcohol_History",
+    "Diabetes_History",
+    "Heart_Disease_History",
+    "Bronchitis_History",
+    "Breast_Cancer_History",
+    "Systolic_BP",
+    "Diastolic_BP",
+    "Heart_Rate",
+    "Respiratory_Rate",
+    "SpO2",
+    "Temperature",
+    "BMI",
+    "Height_cm",
+    "Weight_kg",
+    "Chest_Xray_Finding",
+    "Mammogram_Finding",
+    "Imaging_Report",
+    "Image_Category"
+  ],
+  "disease_model": {
+    "target": "Disease_Label",
+    "best_model": "Logistic Regression",
+    "classes": [
+      "Breast Cancer",
+      "Bronchitis",
+      "Diabetes",
+      "Heart Disease"
+    ],
+    "results": [
+      {
+        "model": "Logistic Regression",
+        "accuracy": 0.88,
+        "precision_weighted": 0.8815812702487926,
+        "recall_weighted": 0.88,
+        "f1_weighted": 0.8804383647141294
+      },
+      {
+        "model": "Random Forest",
+        "accuracy": 0.859,
+        "precision_weighted": 0.8589196844345586,
+        "recall_weighted": 0.859,
+        "f1_weighted": 0.8589289214411719
+      },
+      {
+        "model": "Gradient Boosting",
+        "accuracy": 0.871,
+        "precision_weighted": 0.87359340600692,
+        "recall_weighted": 0.871,
+        "f1_weighted": 0.8717997157903135
+      },
+      {
+        "model": "Extra Trees",
+        "accuracy": 0.824,
+        "precision_weighted": 0.823717426163222,
+        "recall_weighted": 0.824,
+        "f1_weighted": 0.8238473299579107
+      },
+      {
+        "model": "Hist Gradient Boosting",
+        "accuracy": 0.877,
+        "precision_weighted": 0.8800220515354059,
+        "recall_weighted": 0.877,
+        "f1_weighted": 0.8779030980374718
+      }
+    ],
+    "best_accuracy": 0.88,
+    "best_precision": 0.8815812702487926,
+    "best_recall": 0.88,
+    "best_f1": 0.8804383647141294,
+    "confusion_matrix": [
+      [
+        221,
+        8,
+        8,
+        13
+      ],
+      [
+        5,
+        232,
+        2,
+        11
+      ],
+      [
+        11,
+        2,
+        211,
+        26
+      ],
+      [
+        1,
+        8,
+        25,
+        216
+      ]
+    ],
+    "classification_report": {
+      "Breast Cancer": {
+        "precision": 0.9285714285714286,
+        "recall": 0.884,
+        "f1-score": 0.9057377049180327,
+        "support": 250.0
+      },
+      "Bronchitis": {
+        "precision": 0.928,
+        "recall": 0.928,
+        "f1-score": 0.928,
+        "support": 250.0
+      },
+      "Diabetes": {
+        "precision": 0.8577235772357723,
+        "recall": 0.844,
+        "f1-score": 0.8508064516129032,
+        "support": 250.0
+      },
+      "Heart Disease": {
+        "precision": 0.8120300751879699,
+        "recall": 0.864,
+        "f1-score": 0.8372093023255814,
+        "support": 250.0
+      },
+      "accuracy": 0.88,
+      "macro avg": {
+        "precision": 0.8815812702487926,
+        "recall": 0.88,
+        "f1-score": 0.8804383647141294,
+        "support": 1000.0
+      },
+      "weighted avg": {
+        "precision": 0.8815812702487926,
+        "recall": 0.88,
+        "f1-score": 0.8804383647141294,
+        "support": 1000.0
+      }
+    },
+    "test_size": 1000,
+    "train_size": 4000,
+    "class_distribution": {
+      "Breast Cancer": 1250,
+      "Bronchitis": 1250,
+      "Diabetes": 1250,
+      "Heart Disease": 1250
+    }
+  },
+  "risk_model": {
+    "target": "Risk_Level",
+    "best_model": "Random Forest",
+    "classes": [
+      "High",
+      "Low",
+      "Medium"
+    ],
+    "results": [
+      {
+        "model": "Logistic Regression",
+        "accuracy": 0.455,
+        "precision_weighted": 0.45349099303282125,
+        "recall_weighted": 0.455,
+        "f1_weighted": 0.45389520732109995
+      },
+      {
+        "model": "Random Forest",
+        "accuracy": 0.543,
+        "precision_weighted": 0.5537546012419017,
+        "recall_weighted": 0.543,
+        "f1_weighted": 0.5447472473291224
+      },
+      {
+        "model": "Gradient Boosting",
+        "accuracy": 0.512,
+        "precision_weighted": 0.513182332326829,
+        "recall_weighted": 0.512,
+        "f1_weighted": 0.509737090603284
+      },
+      {
+        "model": "Extra Trees",
+        "accuracy": 0.503,
+        "precision_weighted": 0.5151870955957593,
+        "recall_weighted": 0.503,
+        "f1_weighted": 0.5030329762592822
+      },
+      {
+        "model": "Hist Gradient Boosting",
+        "accuracy": 0.529,
+        "precision_weighted": 0.5301646738211933,
+        "recall_weighted": 0.529,
+        "f1_weighted": 0.5282763400153087
+      }
+    ],
+    "best_accuracy": 0.543,
+    "best_precision": 0.5537546012419017,
+    "best_recall": 0.543,
+    "best_f1": 0.5447472473291224,
+    "confusion_matrix": [
+      [
+        139,
+        38,
+        103
+      ],
+      [
+        14,
+        210,
+        126
+      ],
+      [
+        62,
+        114,
+        194
+      ]
+    ],
+    "classification_report": {
+      "High": {
+        "precision": 0.6465116279069767,
+        "recall": 0.49642857142857144,
+        "f1-score": 0.5616161616161616,
+        "support": 280.0
+      },
+      "Low": {
+        "precision": 0.580110497237569,
+        "recall": 0.6,
+        "f1-score": 0.5898876404494382,
+        "support": 350.0
+      },
+      "Medium": {
+        "precision": 0.458628841607565,
+        "recall": 0.5243243243243243,
+        "f1-score": 0.489281210592686,
+        "support": 370.0
+      },
+      "accuracy": 0.543,
+      "macro avg": {
+        "precision": 0.5617503222507035,
+        "recall": 0.5402509652509653,
+        "f1-score": 0.5469283375527619,
+        "support": 1000.0
+      },
+      "weighted avg": {
+        "precision": 0.5537546012419017,
+        "recall": 0.543,
+        "f1-score": 0.5447472473291224,
+        "support": 1000.0
+      }
+    },
+    "test_size": 1000,
+    "train_size": 4000,
+    "class_distribution": {
+      "Medium": 1848,
+      "Low": 1752,
+      "High": 1400
+    }
+  },
+  "next_disease_model": {
+    "target": "Next_Possible_Disease",
+    "best_model": "Logistic Regression",
+    "classes": [
+      "Breast Cancer",
+      "Bronchitis",
+      "Diabetes",
+      "Heart Disease"
+    ],
+    "results": [
+      {
+        "model": "Logistic Regression",
+        "accuracy": 0.788,
+        "precision_weighted": 0.792668599339891,
+        "recall_weighted": 0.788,
+        "f1_weighted": 0.7884403769849543
+      },
+      {
+        "model": "Random Forest",
+        "accuracy": 0.782,
+        "precision_weighted": 0.7851873568460525,
+        "recall_weighted": 0.782,
+        "f1_weighted": 0.7818630928773748
+      },
+      {
+        "model": "Gradient Boosting",
+        "accuracy": 0.78,
+        "precision_weighted": 0.7792485031647374,
+        "recall_weighted": 0.78,
+        "f1_weighted": 0.7795037511596103
+      },
+      {
+        "model": "Extra Trees",
+        "accuracy": 0.734,
+        "precision_weighted": 0.7358203981000604,
+        "recall_weighted": 0.734,
+        "f1_weighted": 0.7340034194812481
+      },
+      {
+        "model": "Hist Gradient Boosting",
+        "accuracy": 0.781,
+        "precision_weighted": 0.7808748018267997,
+        "recall_weighted": 0.781,
+        "f1_weighted": 0.7807668048602601
+      }
+    ],
+    "best_accuracy": 0.788,
+    "best_precision": 0.792668599339891,
+    "best_recall": 0.788,
+    "best_f1": 0.7884403769849543,
+    "confusion_matrix": [
+      [
+        174,
+        21,
+        9,
+        10
+      ],
+      [
+        45,
+        229,
+        17,
+        30
+      ],
+      [
+        8,
+        17,
+        251,
+        18
+      ],
+      [
+        11,
+        16,
+        10,
+        134
+      ]
+    ],
+    "classification_report": {
+      "Breast Cancer": {
+        "precision": 0.7310924369747899,
+        "recall": 0.8130841121495327,
+        "f1-score": 0.7699115044247787,
+        "support": 214.0
+      },
+      "Bronchitis": {
+        "precision": 0.8091872791519434,
+        "recall": 0.7133956386292835,
+        "f1-score": 0.7582781456953642,
+        "support": 321.0
+      },
+      "Diabetes": {
+        "precision": 0.8745644599303136,
+        "recall": 0.8537414965986394,
+        "f1-score": 0.8640275387263339,
+        "support": 294.0
+      },
+      "Heart Disease": {
+        "precision": 0.6979166666666666,
+        "recall": 0.783625730994152,
+        "f1-score": 0.7382920110192838,
+        "support": 171.0
+      },
+      "accuracy": 0.788,
+      "macro avg": {
+        "precision": 0.7781902106809284,
+        "recall": 0.7909617445929019,
+        "f1-score": 0.7826272999664401,
+        "support": 1000.0
+      },
+      "weighted avg": {
+        "precision": 0.792668599339891,
+        "recall": 0.788,
+        "f1-score": 0.7884403769849543,
+        "support": 1000.0
+      }
+    },
+    "test_size": 1000,
+    "train_size": 4000,
+    "class_distribution": {
+      "Bronchitis": 1607,
+      "Diabetes": 1468,
+      "Breast Cancer": 1072,
+      "Heart Disease": 853
+    }
+  }
+}

@@ -1,0 +1,1588 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="home-page">
+
+    <!-- =====================================================
+         HERO SECTION
+    ====================================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <i class="fa-solid fa-shield-heart"></i>
+                AI-POWERED HEALTHCARE ANALYSIS
+            </div>
+
+            <h1>
+                Multimodal Health Risk
+                <span>Prediction</span>
+            </h1>
+
+            <p>
+                Analyze multiple healthcare factors using
+                Machine Learning and Explainable AI to
+                identify disease risks and understand the
+                major contributing factors.
+            </p>
+
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="health-circle">
+
+                <div class="circle-inner">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                </div>
+
+                <div class="circle-dot dot-1"></div>
+                <div class="circle-dot dot-2"></div>
+                <div class="circle-dot dot-3"></div>
+                <div class="circle-dot dot-4"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HEALTH FACTORS
+    ====================================================== -->
+
+    <section class="factors-section">
+
+        <div class="section-heading">
+
+            <span>
+                HEALTH DATA
+            </span>
+
+            <h2>
+                Select a Health Factor
+            </h2>
+
+            <p>
+                Click any factor to open its input panel.
+            </p>
+
+        </div>
+
+
+        <div class="factor-grid">
+
+
+            <!-- =================================================
+                 LABORATORY
+            ================================================== -->
+
+            <button
+                type="button"
+                class="factor-card laboratory-card"
+                data-factor="laboratory"
+            >
+
+                <div class="factor-icon">
+
+                    <i class="fa-solid fa-flask-vial"></i>
+
+                </div>
+
+                <div class="factor-text">
+
+                    <h3>
+                        Laboratory Reports
+                    </h3>
+
+                    <p>
+                        Blood tests, glucose, HbA1c,
+                        cholesterol and biomarkers.
+                    </p>
+
+                </div>
+
+                <div class="factor-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MEDICAL HISTORY
+            ================================================== -->
+
+            <button
+                type="button"
+                class="factor-card history-card"
+                data-factor="history"
+            >
+
+                <div class="factor-icon">
+
+                    <i class="fa-solid fa-file-medical"></i>
+
+                </div>
+
+                <div class="factor-text">
+
+                    <h3>
+                        Medical History
+                    </h3>
+
+                    <p>
+                        Age, gender, family history
+                        and previous diseases.
+                    </p>
+
+                </div>
+
+                <div class="factor-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 VITAL SIGNS
+            ================================================== -->
+
+            <button
+                type="button"
+                class="factor-card vital-card"
+                data-factor="vital"
+            >
+
+                <div class="factor-icon">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                </div>
+
+                <div class="factor-text">
+
+                    <h3>
+                        Vital Signs
+                    </h3>
+
+                    <p>
+                        Blood pressure, heart rate,
+                        SpO₂, BMI and temperature.
+                    </p>
+
+                </div>
+
+                <div class="factor-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MEDICAL IMAGING
+            ================================================== -->
+
+            <button
+                type="button"
+                class="factor-card imaging-card"
+                data-factor="imaging"
+            >
+
+                <div class="factor-icon">
+
+                    <i class="fa-solid fa-x-ray"></i>
+
+                </div>
+
+                <div class="factor-text">
+
+                    <h3>
+                        Medical Imaging
+                    </h3>
+
+                    <p>
+                        X-ray, mammogram and
+                        imaging findings.
+                    </p>
+
+                </div>
+
+                <div class="factor-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+            </button>
+
+        </div>
+
+        <div class="analyze-all-container">
+
+            <button
+                type="button"
+                class="primary-action-btn analyze-all-bottom"
+                id="analyzeAllButton"
+            >
+
+                 <i class="fa-solid fa-magnifying-glass-chart"></i>
+
+                <span>
+                  Analyze All
+                 </span>
+
+            </button>
+
+        </div>
+    </section>
+
+
+
+    <!-- =====================================================
+         INFORMATION SECTION
+    ====================================================== -->
+
+    <section class="info-section">
+
+        <div class="info-item">
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-brain"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Machine Learning
+                </h3>
+
+                <p>
+                    Disease-specific prediction models
+                    analyze the provided healthcare data.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-lightbulb"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Explainable AI
+                </h3>
+
+                <p>
+                    SHAP and LIME help explain the
+                    factors influencing the prediction.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <div class="info-icon">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+            </div>
+
+            <div>
+
+                <h3>
+                    Future Risk
+                </h3>
+
+                <p>
+                    The system also identifies a possible
+                    future disease risk.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+
+<!-- =========================================================
+     MODAL
+     IMPORTANT:
+     This is OUTSIDE the factor cards.
+     It is fixed to the entire browser window.
+========================================================= -->
+
+<div
+    id="healthFactorModal"
+    class="health-factor-modal"
+    aria-hidden="true"
+>
+
+    <div class="health-factor-modal-backdrop"></div>
+
+
+    <div
+        class="health-factor-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <!-- CLOSE -->
+
+        <button
+            type="button"
+            class="health-factor-close"
+            id="closeHealthFactorModal"
+            aria-label="Close"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <!-- HEADER -->
+
+        <div class="modal-header-area">
+
+            <div
+                class="modal-factor-icon"
+                id="modalFactorIcon"
+            >
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+            </div>
+
+            <div>
+
+                <h2 id="modalFactorTitle">
+                    Health Factor
+                </h2>
+
+                <p id="modalFactorDescription">
+                    Enter the required information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LABORATORY FORM
+        ================================================== -->
+
+        <form
+            id="laboratoryForm"
+            class="factor-form"
+            action="/predict"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Glucose (70-100 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Glucose"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        HbA1c (4-6%)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="HbA1c"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Cholesterol (100-200 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Cholesterol"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        HDL (40-60 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="HDL"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        LDL (100-160 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="LDL"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Triglycerides (50-150 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Triglycerides"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Hemoglobin (12-18 g/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Hemoglobin"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Creatinine (0.6-1.2 mg/dL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Creatinine"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        WBC (4,000-11,000/μL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="WBC"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Platelets (150,000-450,000/μL)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Platelets"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary-button"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-primary-button"
+                >
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analyze Laboratory Data
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+
+        <!-- =================================================
+             MEDICAL HISTORY FORM
+        ================================================== -->
+
+        <form
+            id="historyForm"
+            class="factor-form"
+            action="/predict"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        name="Age"
+                        min="1"
+                        max="120"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Gender
+                    </label>
+
+                    <select name="Gender">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Family History
+                    </label>
+
+                    <select name="Family_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Previous Diseases
+                    </label>
+
+                    <select name="Previous_Diseases">
+
+                        <option value="">
+                            None
+                        </option>
+
+                        <option value="Asthma">
+                            Asthma
+                        </option>
+
+                        <option value="Diabetes">
+                            Diabetes
+                        </option>
+
+                        <option value="Hypertension">
+                            Hypertension
+                        </option>
+
+                        <option value="Breast Cancer">
+                            Breast Cancer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Smoking History
+                    </label>
+
+                    <select name="Smoking_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Alcohol History
+                    </label>
+
+                    <select name="Alcohol_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Diabetes History
+                    </label>
+
+                    <select name="Diabetes_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Heart Disease History
+                    </label>
+
+                    <select name="Heart_Disease_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Bronchitis History
+                    </label>
+
+                    <select name="Bronchitis_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Breast Cancer History
+                    </label>
+
+                    <select name="Breast_Cancer_History">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary-button"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-primary-button"
+                >
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analyze Medical History
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+
+        <!-- =================================================
+             VITAL SIGNS FORM
+        ================================================== -->
+
+        <form
+            id="vitalForm"
+            class="factor-form"
+            action="/predict"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Systolic BP (120-140 mmHg)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Systolic_BP"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Diastolic BP (80-90 mmHg)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Diastolic_BP"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Heart Rate (60-100 bpm)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Heart_Rate"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Respiratory Rate (12-20 breaths/min)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Respiratory_Rate"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        SpO₂ (95-100%)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="SpO2"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Temperature (36.1-37.2°C)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Temperature"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        BMI (18.5-24.9 kg/m²)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="BMI"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Height (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Height_cm"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Weight (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Weight_kg"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary-button"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-primary-button"
+                >
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analyze Vital Signs
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+
+        <!-- =================================================
+             IMAGING FORM
+        ================================================== -->
+
+        <form
+            id="imagingForm"
+            class="factor-form"
+            action="/predict"
+            method="POST"
+        >
+
+            <div class="form-grid">
+
+                <div class="input-group">
+
+                    <label>
+                        Chest X-ray Finding
+                    </label>
+
+                    <select name="Chest_Xray_Finding">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Mild Abnormality">
+                            Mild Abnormality
+                        </option>
+
+                        <option value="Hyperinflation">
+                            Hyperinflation
+                        </option>
+                         <option value="Cardiomegaly">
+                            Cardiomegaly
+                        </option>                        
+                        <option value="Normal">
+                            Normal
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Mammogram Finding
+                    </label>
+
+                    <select name="Mammogram_Finding">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Suspicious">
+                            Suspicious
+                        </option>
+
+                        <option value="Benign">
+                            Benign
+                        </option>
+
+                        <option value="Dense Tissue">
+                            Dense Tissue
+                        </option>
+                        
+                        <option value="Normal">
+                            Normal
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Imaging Report
+                    </label>
+
+                    <select name = "Imaging_Report">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Normal">
+                            Normal
+                        </option>
+
+                        <option value="Abnormal">
+                            Abnormal
+                        </option>
+                    </select>    
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        Image Category
+                    </label>
+
+                    <select name="Image_Category">
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="X-ray">
+                            X-ray
+                        </option>
+
+                        <option value="Mammogram">
+                            Mammogram
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="modal-secondary-button"
+                    data-close-modal
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="modal-primary-button"
+                >
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Analyze Imaging
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     HOME PAGE JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const modal =
+            document.getElementById(
+                "healthFactorModal"
+            );
+
+        const modalTitle =
+            document.getElementById(
+                "modalFactorTitle"
+            );
+
+        const modalDescription =
+            document.getElementById(
+                "modalFactorDescription"
+            );
+
+        const modalIcon =
+            document.getElementById(
+                "modalFactorIcon"
+            );
+
+        const closeButton =
+            document.getElementById(
+                "closeHealthFactorModal"
+            );
+
+
+        const factorCards =
+            document.querySelectorAll(
+                ".factor-card"
+            );
+
+
+        const forms =
+            document.querySelectorAll(
+                ".factor-form"
+            );
+
+
+        /*
+         * Factor information
+         */
+
+        const factorData = {
+
+            laboratory: {
+
+                title:
+                    "Laboratory Reports",
+
+                description:
+                    "Enter laboratory and blood test information.",
+
+                icon:
+                    "fa-solid fa-flask-vial",
+
+                form:
+                    "laboratoryForm"
+
+            },
+
+
+            history: {
+
+                title:
+                    "Medical History",
+
+                description:
+                    "Enter patient and family medical history.",
+
+                icon:
+                    "fa-solid fa-file-medical",
+
+                form:
+                    "historyForm"
+
+            },
+
+
+            vital: {
+
+                title:
+                    "Vital Signs",
+
+                description:
+                    "Enter the patient's vital health measurements.",
+
+                icon:
+                    "fa-solid fa-heart-pulse",
+
+                form:
+                    "vitalForm"
+
+            },
+
+
+            imaging: {
+
+                title:
+                    "Medical Imaging",
+
+                description:
+                    "Enter imaging and diagnostic findings.",
+
+                icon:
+                    "fa-solid fa-x-ray",
+
+                form:
+                    "imagingForm"
+
+            }
+
+        };
+
+
+        /*
+         * Open modal
+         */
+
+        function openFactorModal(
+            factor
+        ) {
+
+            const data =
+                factorData[factor];
+
+
+            if (!data) {
+
+                return;
+
+            }
+
+
+            modalTitle.textContent =
+                data.title;
+
+
+            modalDescription.textContent =
+                data.description;
+
+
+            modalIcon.innerHTML =
+                `<i class="${data.icon}"></i>`;
+
+
+            /*
+             * Hide every form
+             */
+
+            forms.forEach(
+                function (form) {
+
+                    form.classList.remove(
+                        "active-factor-form"
+                    );
+
+                }
+            );
+
+
+            /*
+             * Show selected form
+             */
+
+            const selectedForm =
+                document.getElementById(
+                    data.form
+                );
+
+
+            if (selectedForm) {
+
+                selectedForm.classList.add(
+                    "active-factor-form"
+                );
+
+            }
+
+
+            /*
+             * Show popup
+             */
+
+            modal.classList.add(
+                "active"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "health-modal-open"
+            );
+
+        }
+
+
+        /*
+         * Attach click to all factor cards
+         */
+
+        factorCards.forEach(
+            function (card) {
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        const factor =
+                            card.getAttribute(
+                                "data-factor"
+                            );
+
+
+                        openFactorModal(
+                            factor
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /*
+         * Analyze All
+         *
+         * Opens the complete prediction page.
+         */
+
+        const analyzeAllButton =
+            document.getElementById(
+                "analyzeAllButton"
+            );
+
+
+        if (analyzeAllButton) {
+
+            analyzeAllButton.addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "/predict";
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Close button
+         */
+
+        closeButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        /*
+         * Clicking dark background closes popup
+         */
+
+        const backdrop =
+            document.querySelector(
+                ".health-factor-modal-backdrop"
+            );
+
+
+        backdrop.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        /*
+         * Cancel buttons
+         */
+
+        document.querySelectorAll(
+            "[data-close-modal]"
+        ).forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    closeModal
+                );
+
+            }
+        );
+
+
+        /*
+         * ESC key
+         */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Close function
+         */
+
+        function closeModal() {
+
+            modal.classList.remove(
+                "active"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "health-modal-open"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

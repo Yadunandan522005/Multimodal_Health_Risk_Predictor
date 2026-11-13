@@ -1,0 +1,517 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="patient-dashboard">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="patient-dashboard-header">
+
+        <div>
+
+            <span class="dashboard-eyebrow">
+                PATIENT-SPECIFIC ANALYSIS
+            </span>
+
+            <h1>
+                Health Risk Analysis Dashboard
+            </h1>
+
+            <p>
+                Analysis based on the health factors provided
+                for this prediction.
+            </p>
+
+        </div>
+
+        <div class="patient-dashboard-icon">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- SUMMARY -->
+    <!-- ================================================= -->
+
+    <div class="patient-summary-grid">
+
+        <div class="patient-stat">
+
+            <span>
+                PREDICTED DISEASE
+            </span>
+
+            <strong>
+                {{ result.disease }}
+            </strong>
+
+        </div>
+
+
+        <div class="patient-stat">
+
+            <span>
+                RISK LEVEL
+            </span>
+
+            <strong>
+                {{ result.risk }}
+            </strong>
+
+        </div>
+
+
+        <div class="patient-stat">
+
+            <span>
+                MODEL CONFIDENCE
+            </span>
+
+            <strong>
+                {{ result.confidence }}%
+            </strong>
+
+        </div>
+
+
+        <div class="patient-stat">
+
+            <span>
+                FACTORS USED
+            </span>
+
+            <strong>
+                {{ result.modality_count }}/4
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- CHART + DESCRIPTION -->
+    <!-- ================================================= -->
+
+    <div class="patient-chart-card">
+
+        <div class="patient-chart-header">
+
+            <div>
+
+                <span class="dashboard-eyebrow">
+                    PREDICTION PROBABILITY
+                </span>
+
+                <h2>
+                    Disease Probability Distribution
+                </h2>
+
+            </div>
+
+            <div class="chart-icon">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+            </div>
+
+        </div>
+
+
+        <div class="patient-chart-layout">
+
+            <div class="patient-chart-wrapper">
+
+                <canvas id="patientDiseaseChart"></canvas>
+
+            </div>
+
+
+            <div class="chart-description">
+
+                <h3>
+                    What does this chart mean?
+                </h3>
+
+                <p>
+
+                    This pie chart represents the estimated
+                    probability assigned by the trained model
+                    to each of the four target diseases.
+
+                </p>
+
+                <p>
+
+                    The largest section represents the disease
+                    with the highest predicted probability.
+
+                </p>
+
+
+                <div class="prediction-highlight">
+
+                    <span>
+                        Highest predicted disease
+                    </span>
+
+                    <strong>
+                        {{ result.disease }}
+                    </strong>
+
+                    <small>
+                        Confidence:
+                        {{ result.confidence }}%
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- FACTORS USED -->
+    <!-- ================================================= -->
+
+    <div class="patient-analysis-card">
+
+        <div class="patient-section-title">
+
+            <div class="patient-section-icon">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+            </div>
+
+            <div>
+
+                <span>
+                    INPUT ANALYSIS
+                </span>
+
+                <h2>
+                    Health Factors Used
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="patient-factor-grid">
+
+            {% set modalities = [
+                "Laboratory Reports",
+                "Medical History",
+                "Vital Signs",
+                "Medical Imaging"
+            ] %}
+
+
+            {% for modality in modalities %}
+
+            <div class="patient-factor
+                {% if modality in result.used_modalities %}
+                    factor-used
+                {% else %}
+                    factor-not-used
+                {% endif %}
+            ">
+
+                <div class="factor-status-icon">
+
+                    {% if modality in result.used_modalities %}
+
+                    <i class="fa-solid fa-check"></i>
+
+                    {% else %}
+
+                    <i class="fa-solid fa-minus"></i>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ modality }}
+                    </strong>
+
+                    {% if modality in result.used_modalities %}
+
+                    <span>
+                        Used for prediction
+                    </span>
+
+                    {% else %}
+
+                    <span>
+                        Not provided
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- NEXT DISEASE -->
+    <!-- ================================================= -->
+
+    <div class="patient-next-card">
+
+        <div class="next-card-icon">
+
+            <i class="fa-solid fa-arrow-trend-up"></i>
+
+        </div>
+
+        <div>
+
+            <span>
+                FUTURE RISK
+            </span>
+
+            <h2>
+                {{ result.next_disease }}
+            </h2>
+
+            <p>
+                This is the next possible disease predicted
+                by the trained model based on the available
+                information.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- PREVENTION -->
+    <!-- ================================================= -->
+
+    <div class="patient-prevention-grid">
+
+        <div class="patient-prevention-card">
+
+            <div class="prevention-icon">
+
+                <i class="fa-solid fa-shield-heart"></i>
+
+            </div>
+
+            <span>
+                CURRENT DISEASE
+            </span>
+
+            <h3>
+                Prevention & Guidance
+            </h3>
+
+            <p>
+                {{ result.current_prevention }}
+            </p>
+
+        </div>
+
+
+        <div class="patient-prevention-card">
+
+            <div class="prevention-icon next-prevention-icon">
+
+                <i class="fa-solid fa-shield"></i>
+
+            </div>
+
+            <span>
+                NEXT POSSIBLE DISEASE
+            </span>
+
+            <h3>
+                Prevention & Guidance
+            </h3>
+
+            <p>
+                {{ result.next_prevention }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- ACTIONS -->
+    <!-- ================================================= -->
+
+    <div class="patient-dashboard-actions">
+
+        <a
+            href="{{ url_for('download_result') }}"
+            class="patient-action-button download-action">
+
+            <i class="fa-solid fa-file-arrow-down"></i>
+
+            Download Full Report
+
+        </a>
+
+
+        <a
+            href="{{ url_for('prediction') }}"
+            class="patient-action-button new-analysis-action">
+
+            <i class="fa-solid fa-rotate"></i>
+
+            New Analysis
+
+        </a>
+
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="patient-action-button dashboard-action">
+
+            <i class="fa-solid fa-chart-column"></i>
+
+            Dataset Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ===================================================== -->
+<!-- CHART.JS -->
+<!-- ===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+
+const diseaseProbabilities =
+    {{ result.disease_probabilities | tojson }};
+
+
+const labels =
+    Object.keys(diseaseProbabilities);
+
+
+const values =
+    Object.values(diseaseProbabilities)
+        .map(value => value * 100);
+
+
+new Chart(
+
+    document.getElementById(
+        "patientDiseaseChart"
+    ),
+
+    {
+
+        type: "pie",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+
+                {
+
+                    data: values,
+
+                    borderWidth: 3,
+
+                    borderColor: "#ffffff"
+
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: true,
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom",
+
+                    labels: {
+
+                        padding: 15,
+
+                        usePointStyle: true,
+
+                        font: {
+
+                            size: 10
+
+                        }
+
+                    }
+
+                },
+
+                tooltip: {
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            return (
+                                context.label +
+                                ": " +
+                                context.parsed.toFixed(2) +
+                                "%"
+                            );
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+</script>
+
+{% endblock %}
